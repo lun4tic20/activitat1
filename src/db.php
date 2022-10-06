@@ -18,7 +18,7 @@
         try{
             $db = new PDO($dsn, $dbuser, $dbpass);
             $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-            $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
+            $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_OBJ);
 
         }catch(PDOException $e){
             die( $e->getMessage());
@@ -35,6 +35,23 @@
      * @param string $password
      * @return boolean
      */
-    function auth(string $db, string $email, string $password):bool{
+    function auth(PDO $db, string $email, string $password):bool{
+        
+        $stmt = $db->prepare("SELECT * FROM USERS WHERE email=:email LIMIT 1");
+        $res=$stmt->execute([':email'=>$email]);
+        
+        if($stmt->rowCount()==1){
+            $user=$stmt->fetchAll()[0];
+            
+            if(password_verify($password, $user->password)){
+                //login correcte
+               
+                $_SESSION['user']=$user;
+                return true;
+            }
+            
+        }
+        return false;
         
     }
+    

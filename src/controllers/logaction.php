@@ -12,9 +12,14 @@
         if(isset($_POST['email'])&& isset($_POST['password'])){
             $email=$_REQUEST['email'];
             $password=$_REQUEST['password'];
+            
             if(auth($db,$email,$password)){
-                //desem sessió
-                //redirigir a dashboard
+                //true
+                
+                header('Location:?url=dashboard');
+            }else{
+                //false
+                header('Location:?url=login');
             }
         }
     }

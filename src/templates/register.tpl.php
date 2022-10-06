@@ -4,7 +4,7 @@
 ?>
 <body>
     <br><br><header>REGISTER</header><br>
-    <form>
+    <form action="?url=registeraction" method="POST">
         <label for="user">Username</label><br>
         <input type="text"><br><br>
         <label for="passwd">Password</label><br>

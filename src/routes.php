@@ -6,5 +6,6 @@ $routes=[
         'register',
         'registeraction',
         'dashboard',
+        'logout',
         'error'
     ];

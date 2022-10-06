@@ -1,7 +1,7 @@
 <?php
-
+    ini_set('display_errors','On');
     session_start();
-
+    define('APP',__DIR__);
     //configuració entorn
     require 'config.php'; //diferencia con include es q solo lo usa cuando se necesita (el include usa todo)
     require 'src/router.php';
